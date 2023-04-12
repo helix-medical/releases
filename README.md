@@ -17,5 +17,7 @@ To install, when the project will be finished, we will use Docker and MySQL to d
 ## Installation
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/helix-medical/releases/main/install.sh)
+git clone https://github.com/helix-medical/relases
+cd releases
+docker-compose up -d # Not ready yet
 ```
