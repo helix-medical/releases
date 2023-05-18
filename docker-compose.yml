@@ -20,10 +20,12 @@ services:
       - HELIX_DB_USER=root
       - PORT_API=3001
       - HELIX_DB_PORT=5002
-      - HELIX_DB_PASSWORD=root
+      - HELIX_DB_PASSWORD=/run/secrets/db-password
       - HELIX_DB_NAME=helix
-      - ACCESS_TOKEN_SECRET=6e33d0a512b1e164d3a221057391c9c32bc639494006aed8509c8753b12ac89a4216aafba152fc350dae0777de72dad895d3b92db9caf7718167075531351e16
-      - REFRESH_TOKEN_SECRET=babfc1221680682bed2a185fd27c887fd43cf4aa27d3e985b0b92e3d8c9bb5d4fd60e22d75e661bc1ab125579f49daf37cb0cbabf586ff19008c836acfdfe81f
+      - ACCESS_TOKEN_SECRET=/run/secrets/access-token
+      - REFRESH_TOKEN_SECRET=/run/secrets/refresh-token
+    volumes:
+      - './config:/run/secrets'
 
   client:
     container_name: client
@@ -51,7 +53,9 @@ services:
       helix:
         ipv4_address: 10.10.0.3
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    volumes:
+      - './config:/run/secrets'
     healthcheck:
       test:
         [
